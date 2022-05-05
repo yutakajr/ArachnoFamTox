@@ -6,7 +6,7 @@ Something here
 
 #### Download ArachnoFamTox 
 ```
-git clone https://github.com/fmidori/arachnofamtox.git ArachnoFamTox
+git clone https://github.com/yutaka/ArachnoFamTox.git ArachnoFamTox
 ```
 
 #### Change to directory 
@@ -14,15 +14,20 @@ git clone https://github.com/fmidori/arachnofamtox.git ArachnoFamTox
 cd ArachnoFamTox
 ```
 
-#### Create and activate a conda environment (optional)
+#### Create and activate a python virtual environment
 ```
-conda create --name ArachnoFamTox --file requirements.txt
-conda activate ArachnoFamTox
+python -m venv arachnofamtox_env
+source arachnofamtox_env/bin/activate
 ```
 
-#### OR Download packages with pip (optional)
+#### Install packages in new environment
 ```
 pip install -r requirements.txt
+```
+
+#### Install ArachnoFamTox
+```
+python setup.py install 
 ```
 
 #### Test if ArachnoFamTox is running
