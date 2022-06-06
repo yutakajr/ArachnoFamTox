@@ -6,22 +6,30 @@ from Bio import SearchIO
 
 def run_hmmscan(fasta,args):
     warn("stdout",f"running hmmscan with evalue {args.eHMM}")
+    if str(args.path) == 'db':
+        path = Path("db/HMM/", "Arachnida.hmm")
+    else:
+        path = str(args.path) + '/HMM/' + str(args.model_name) + '.hmm'
     subprocess.run([
                     "hmmscan",
                     "--cpu", str(args.cpu),
                     "-E" , str(args.eHMM),
                     "--domE", str(args.eHMM),
                     "--domtblout" , Path(args.out, "out.hmmer.domtab"),
-                    Path("db", "Arachnida.hmm"),
+                    path, #here
                     fasta],
                     stdout=subprocess.DEVNULL)
     return str(Path(args.out, "out.hmmer.domtab")) 
 
 def run_rpsblast(fasta,args):
     warn("stdout",f"running RPS-BLAST with evalue {args.ePSSM}")
+    if str(args.path) == 'db':
+        path = Path("db/PSSM/", "ArachnidaToxinsV3.pssm")
+    else:
+        path = str(args.path) + '/PSSM/' + str(args.model_name) + '.pssm'
     subprocess.run([
                     "rpsblast", 
-                    "-db", Path("db", "ArachnidaToxinsV3.pssm"), #here
+                    "-db", path, #here
                     "-query", fasta, 
                     "-out",  Path(args.out, "out.pssm"),
                     "-evalue", str(args.ePSSM),
@@ -30,10 +38,10 @@ def run_rpsblast(fasta,args):
     return str(Path(args.out, "out.pssm")) 
 
 def run_blastp(fasta,args):
-    warn("stdout",f"running BLASTp with evalue {args.eBLASTP}")
+    warn("stdout",f"running BLASTp with evalue {args.eBLASTP}") 
     subprocess.run([
                     "blastp",
-                    "-db", Path("db", "toxprot"),
+                    "-db", Path("db/ToxProt/", "toxprot"),   #path to db
                     "-query", fasta, 
                     "-out",  Path(args.out, "out.blastp.toxprot"),
                     "-evalue", str(args.eBLASTP),
@@ -44,7 +52,7 @@ def run_blastp(fasta,args):
 def parse_hmmscan(domtab):
     output = open(domtab + '.parsed', 'w')
     with open(domtab, 'r') as f:
-        for record in SearchIO.parse(f, 'hmmscan3-domtab'):
+        for record in SearchIO.parse(f, 'hmmscan3-domtab'): 
             hits = record.hits
             hsps = record.hsps
             num_hits = len(hits)

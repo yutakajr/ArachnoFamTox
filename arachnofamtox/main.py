@@ -5,12 +5,18 @@ import os
 import pandas as pd 
 from .tools import run_hmmscan,run_rpsblast,run_blastp,parse_hmmscan
 from .define_final_results import define_final,gen_final_class_and_evalue,gen_score,filter_results,define_general_class,define_target_final
-from .util import db_dir,output_dir,cpus,search_tools,setup,warn,remove_temp_files
+from .util import db_dir,output_dir,cpus,search_tools,setup,warn,remove_temp_files,line_prepender
 
 
 parser = argparse.ArgumentParser(prog="ArachnoFamTox",description= 'Prediction and Classification of Toxins and Venom Proteins for Arachnid species')
 
 parser.add_argument('-fasta', metavar='<fasta file>' ,help='Specify fasta file')
+
+parser.add_argument("-path", metavar='<string>', default="db",
+        help="Specify models directory path. Default=db")
+
+parser.add_argument("-model_name", metavar='<string>', default="ArachnoFamTox",
+        help="Specify models name. Default=ArachnoFamTox")
 
 parser.add_argument('-eHMM',metavar='<evalue>',
         type=float,help='e-value for HMMSCAN. Default=1e-1',default=1e-1) 
@@ -52,7 +58,7 @@ def merge_and_sort(tsv1, tsv2):
     # Merge two tsvs and sort by first column 
     # Generates merged output
     warn("stdout","Merging predictions")
-    file1 = pd.read_csv(tsv1, sep='\t', names=['0','1','2','3','4','5','6','7','8'])
+    file1 = pd.read_csv(tsv1, sep='\t', names=['0','1','2','3','4','5','6','7','8']) # Header 
     file2 = pd.read_csv(tsv2, sep='\t', names=['0','1','2','3','4','5','6','7','8'])
     concatfiles = pd.concat([file1,file2])
     sorted_concatfiles = concatfiles.sort_values(concatfiles.columns[0], ascending =True)
@@ -194,7 +200,12 @@ def gen_toxprot_output(toxprot,pssmhmm):
     return str(Path(args.out, "toxprot_results.tsv"))
 
 def run():
+    if len(sys.argv) < 2:
+        parser.print_usage()
+        sys.exit(1)
+    
     setup(args)
+
     fasta = str(args.fasta)
     domtab = run_hmmscan(fasta,args) 
     hmmscan = parse_hmmscan(domtab)
@@ -207,6 +218,9 @@ def run():
     else: 
         warn("stdout","No toxins found")
         gen_toxprot_output(toxprot,"Not_found")
+    
+    line_prepender(hmmscan,'record\thits\te-value\tbitscore\taccuracy\tlength\tdescription\tstart\tend\n')
+    line_prepender(rps, 'qseqid\tsseqid\tpident\tlength\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore\tqcovs\tppos\n')
 
     if args.tempfiles == False:
         remove_temp_files(args)
@@ -215,3 +229,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+

@@ -7,11 +7,17 @@ import re
 import argparse
 import shutil
 
-def db_dir():
+def db_dir(args):
     # Search for directory with models
-    if Path('db').is_dir() == False:
-        warn("stderr", "Models for PSSM and HMM not found")
-        sys.exit(1)
+    if str(args.path) == 'db':
+        if Path('db').is_dir() == False:
+            warn("stderr", "Models for PSSM and HMM not found")
+            sys.exit(1)
+    else:
+        if Path(str(args.path).split('/')[0]).is_dir() == False:
+            warn("stderr", "Models for PSSM and HMM not found")
+            sys.exit(1)
+
     return None 
 
 def output_dir(args):
@@ -57,7 +63,7 @@ def search_tools():
 
 def setup(args):
     #warn("stdout","Setup started")
-    db_dir()
+    db_dir(args)
     output_dir(args)
     cpus(args)
     search_tools()
@@ -74,7 +80,13 @@ def warn(tp,text):
 
 def remove_temp_files(args):
     warn("stdout","Removing temporary files")
-    temp_files = ["out.hmmer.domtab", "merged_outputs.tsv","out.blastp.toxprot"]
+    temp_files = ["out.hmmer.domtab", "merged_outputs.tsv","out.blastp.toxprot","out.pssm","out.hmmer.domtab.parsed"]
     for f in temp_files:
         os.remove(Path(args.out, f))
     return None
+
+def line_prepender(filename, line):
+    with open(filename, 'r+') as f:
+        content = f.read()
+        f.seek(0, 0)
+        f.write(line + content)
