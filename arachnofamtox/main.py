@@ -15,8 +15,14 @@ parser.add_argument('-fasta', metavar='<fasta file>' ,help='Specify fasta file')
 parser.add_argument("-path", metavar='<string>', default="db",
         help="Specify models directory path. Default=db")
 
-parser.add_argument("-model_name", metavar='<string>', default="ArachnoFamTox",
-        help="Specify models name. Default=ArachnoFamTox")
+parser.add_argument("-model_name_PSSM", metavar='<string>', default="ArachnidaToxinsV3",
+        help="Specify models name. Default=ArachnidaToxinsV3")
+
+parser.add_argument("-model_name_HMM", metavar='<string>', default="Arachnida",
+        help="Specify models name. Default=Arachnida")
+
+#parser.add_argument("-model_name_toxprot", metavar='<string>', default="toxprot",
+#        help="Specify models name. Default=toxprot")
 
 parser.add_argument('-eHMM',metavar='<evalue>',
         type=float,help='e-value for HMMSCAN. Default=1e-1',default=1e-1) 
