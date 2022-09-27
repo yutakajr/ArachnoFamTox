@@ -9,7 +9,7 @@ def run_hmmscan(fasta,args):
     if str(args.path) == 'db':
         path = Path("db/HMM/", "Arachnida.hmm")
     else:
-        path = str(args.path) + '/HMM/' + str(args.model_name) + '.hmm'
+        path = str(args.path) + '/HMM/' + str(args.model_name_HMM) + '.hmm'
     subprocess.run([
                     "hmmscan",
                     "--cpu", str(args.cpu),
@@ -26,7 +26,7 @@ def run_rpsblast(fasta,args):
     if str(args.path) == 'db':
         path = Path("db/PSSM/", "ArachnidaToxinsV3.pssm")
     else:
-        path = str(args.path) + '/PSSM/' + str(args.model_name) + '.pssm'
+        path = str(args.path) + '/PSSM/' + str(args.model_name_PSSM) + '.pssm'
     subprocess.run([
                     "rpsblast", 
                     "-db", path, #here
@@ -38,14 +38,18 @@ def run_rpsblast(fasta,args):
     return str(Path(args.out, "out.pssm")) 
 
 def run_blastp(fasta,args):
-    warn("stdout",f"running BLASTp with evalue {args.eBLASTP}") 
+    warn("stdout",f"running BLASTp with evalue {args.eBLASTP}")
+    if str(args.path) == 'db':
+        path = Path("db/PSSM/", "ArachnidaToxinsV3.pssm")
+    else:
+        path = str(args.path) + '/ToxProt/toxprot'  
     subprocess.run([
                     "blastp",
-                    "-db", Path("db/ToxProt/", "toxprot"),   #path to db
+                    "-db", path,   #path to db
                     "-query", fasta, 
                     "-out",  Path(args.out, "out.blastp.toxprot"),
                     "-evalue", str(args.eBLASTP),
-                    "-outfmt", "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qcovs ppos", 
+                    "-outfmt", "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qcovs ppos salltitles", 
                     "-num_threads",  str(args.cpu)])
     return str(Path(args.out, "out.blastp.toxprot")) 
 
