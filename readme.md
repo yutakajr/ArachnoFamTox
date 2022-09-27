@@ -96,3 +96,6 @@ Inside output directory, results files are created:
 
 * [Fernanda Midori Abukawa](https://orcid.org/0000-0002-9304-7566)
 * [Milton Yutaka Nishiyama Jr](https://orcid.org/0000-0002-2410-0562)
+
+## Database
+![database](https://user-images.githubusercontent.com/78968039/181517817-48df6c2d-8eac-4ebc-8d59-5a11983e853b.jpeg)
