@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ArachnoFamTox',
-    version='1.0.0',
+    version='1.0.1',
     author = "Fernanda Midori Abukawa",
     author_email = "fernanda.abukawa@gmail.com",
     license = 'GNU',
