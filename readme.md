@@ -1,4 +1,6 @@
 ## ArachnoFamTox: prediction and classification of Arachnids venom and toxin families 
+
+Arachnids are widely studied due to their medical importance in public health and pharmacology. Many components of venom and saliva exhibit important biological actions such as neurotoxic, dermonecrotic, hemorrhagic, or can even act counteracting host defense mechanisms. Due to the wide availability of high-throughput -omics data from venomous animals, identification and classification of venom components constitute an important goal in finding new toxins and molecules with pharmacologically relevant activities. In this paper, we created ArachnoFamToxDB, the first database of Arachnids venom and toxin families that also contains tick proteins. We developed ArachnoFamTox, a tool for predicting and classifying toxins and venom proteins, based on PSSMs and pHMMs. Our method could effectively predict and classify toxins from venomous species and it is the first classifier specialized for Arachnids. Also, the method showed to be the most specific out of all the existing methods for predicting toxins.
  
 ## Installation 
 
