@@ -1,4 +1,4 @@
-from .util import warn 
+from .util import warn
 import subprocess
 import sys 
 from pathlib import Path
@@ -77,3 +77,19 @@ def parse_hmmscan(domtab):
                         str(hsps.env_start) + '\t' + str(hsps.env_end) + '\n' )
     f.close()
     return domtab + ".parsed"
+
+def run_signalp(fasta,args):
+    try:
+        warn("stdout",f"running signalp with default parameters")
+        outfile = open((Path(args.out, "signalp_predictions.tsv")), "w")
+        subprocess.run([
+                        "signalp",
+                        "-fasta", str(fasta),
+                        "-stdout",
+                        ]
+                        , stdout=outfile)
+        warn("stdout",f"finished running signalp")
+    except:
+        warn("stderr", "Signalp not found")
+        sys.exit(1)
+    return str(Path(args.out, "signalp_predictions.tsv"))
