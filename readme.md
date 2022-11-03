@@ -1,13 +1,10 @@
 ## ArachnoFamTox: prediction and classification of Arachnids venom and toxin families 
-
-Arachnids are widely studied due to their medical importance in public health and pharmacology. Many components of venom and saliva exhibit important biological actions such as neurotoxic, dermonecrotic, hemorrhagic, or can even act counteracting host defense mechanisms. Due to the wide availability of high-throughput -omics data from venomous animals, identification and classification of venom components constitute an important goal in finding new toxins and molecules with pharmacologically relevant activities. In this paper, we created ArachnoFamToxDB, the first database of Arachnids venom and toxin families that also contains tick proteins. We developed ArachnoFamTox, a tool for predicting and classifying toxins and venom proteins, based on PSSMs and pHMMs. Our method could effectively predict and classify toxins from venomous species and it is the first classifier specialized for Arachnids. Also, the method showed to be the most specific out of all the existing methods for predicting toxins.
  
 ## Installation 
 
 #### Download ArachnoFamTox 
 ```
 git clone https://github.com/yutakajr/ArachnoFamTox.git ArachnoFamTox
-git clone https://github.com/fmidori/arachnofamtox.git ArachnoFamTox
 ```
 
 #### Change to directory 
@@ -56,6 +53,7 @@ ArachnoFamTox -fasta test.pep -out out_test_dir
   -out <output folder>      Specify directory to output
   --force                   Force re-use output directory. Default=Off.
   --tempfiles               Maintain temporary files. Default=Off.
+  --signalp                 Perform Signalp analysis. Default=Off.
 ``` 
 
 ## Running ArachnoFamTox
@@ -77,7 +75,9 @@ Inside output directory, results files are created:
 * out.hmmer.domtab.parsed: Output from HMMScan search against ArachnoFamTox HMM database; 
 * merged_outputs.tsv (optional): Temporary file with merged outputs from PSSM and HMM searches;
 * out.blastp.toxprot (optional): Temporary file with toxprot search result. 
-
+* signalp_predictions.tsv (optional): File with Signalp predictions.
+* signalp_predictions_filtered.tsv (optional): File with Signalp predictions filtered to show only sequences with predicted signal peptide.
+ 
 
 ## Dependencies
 
@@ -89,6 +89,10 @@ Inside output directory, results files are created:
   Used for RPS-BLAST and BLASTp prediction.    
   *Altschul, Stephen F., et al. "Gapped BLAST and PSI-BLAST: a new generation of protein database search programs." Nucleic acids research 25.17 (1997): 3389-3402.*
 
+* [**SIGNALP 5.0b**](https://www.nature.com/articles/s41587-019-0036-z)
+  Used for RPS-BLAST and BLASTp prediction.    
+  *Almagro Armenteros, José Juan, et al. "SignalP 5.0 improves signal peptide predictions using deep neural networks." Nature biotechnology 37.4 (2019): 420-423.*
+
 
 ## Licence
 
@@ -98,6 +102,3 @@ Inside output directory, results files are created:
 
 * [Fernanda Midori Abukawa](https://orcid.org/0000-0002-9304-7566)
 * [Milton Yutaka Nishiyama Jr](https://orcid.org/0000-0002-2410-0562)
-
-## Database
-![database](https://user-images.githubusercontent.com/78968039/181517817-48df6c2d-8eac-4ebc-8d59-5a11983e853b.jpeg)
