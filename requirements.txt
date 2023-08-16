@@ -1,3 +1,4 @@
 biopython==1.79
+Cython==0.29.34
 numpy==1.20.3
 pandas==1.4.1
