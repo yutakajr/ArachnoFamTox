@@ -1,6 +1,6 @@
 ## ArachnoFamTox: prediction and classification of Arachnids venom and toxin families 
  
-## Installation 
+## Installation for python v3.8 
 
 #### Download ArachnoFamTox 
 ```
@@ -14,7 +14,7 @@ cd ArachnoFamTox
 
 #### Create and activate a python virtual environment
 ```
-python -m venv arachnofamtox_env
+python3.8 -m venv arachnofamtox_env
 source arachnofamtox_env/bin/activate
 ```
 
