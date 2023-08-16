@@ -80,7 +80,7 @@ def warn(tp,text):
 
 def remove_temp_files(args):
     warn("stdout","Removing temporary files")
-    temp_files = ["out.hmmer.domtab", "merged_outputs.tsv","out.blastp.toxprot","out.pssm","out.hmmer.domtab.parsed","signalp_predictions.tsv"]
+    temp_files = ["out.hmmer.domtab", "merged_outputs.tsv","out.blastp.toxprot","out.pssm","out.hmmer.domtab.parsed"]
     for f in temp_files:
         os.remove(Path(args.out, f))
     return None
