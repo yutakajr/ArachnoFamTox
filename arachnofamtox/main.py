@@ -208,6 +208,25 @@ def gen_toxprot_output(toxprot,pssmhmm):
     warn("stdout",f"Found {found} putative toxins by BLASTp vs ToxProt Database.")
     return str(Path(args.out, "toxprot_results.tsv"))
 
+def insert_signalp_results(signalp, args):
+    results_path = Path(args.out, "classification_results.tsv")
+    signalp_lines = []
+    with open(signalp, 'r') as infile:
+        for line in infile:
+            if line.startswith('#'):
+                continue
+            parts = line.strip().split('\t')
+            if len(parts) < 5:
+                parts.append('')  # if "CS Position" is empty
+            signalp_lines.append(parts)
+
+    signalp_df = pd.DataFrame(signalp_lines, columns=["ID", "SP_Prediction", "SP_(Sec/SPI)", "SP_OTHER", "SP_CS Position"])
+    results_df = pd.read_csv(results_path, sep="\t", index_col=None, header=0)
+    merged_df = pd.merge(results_df, signalp_df, left_on='Query', right_on='ID', how='left')
+    merged_df = merged_df.drop(columns=["ID"])
+    merged_df.to_csv(results_path, sep="\t", index=None) #Update results file
+    
+
 def run():
     if len(sys.argv) < 2:
         parser.print_usage()
@@ -234,15 +253,10 @@ def run():
     if args.signalp == True:
         signalp = run_signalp(fasta,args)
         filter_signalp(signalp,args)
+        insert_signalp_results(signalp,args)
 
     if args.tempfiles == False:
         remove_temp_files(args)
     warn("stdout", "Finished analysis.")
     return None
-
-def runn():
-    #fasta = str(args.fasta)
-    #run_signalp(fasta,args)
-    filter_signalp("./out_test_dir/signalp_predictions.tsv",args)
-
 
