@@ -134,9 +134,9 @@ def classify_and_gen_out(tsv):
 
                 if write == True:
                     found += 1 
-                    output.write(str(prev_query) + '\t' + str(general_class) + '\t' + str(result_final)
-                            + '\t' + str(target_final) + '\t' + str(score) + '\t' + str(result_pssm_final) 
-                            + '\t' + str(result_hmm_final) + '\t' + str(evalue_pssm_final)  
+                    output.write(str(prev_query) + '\t' + str(general_class) + '\t' + normalize_family_name(str(result_final))
+                            + '\t' + str(target_final) + '\t' + str(score) + '\t' + normalize_family_name(str(result_pssm_final))
+                            + '\t' + normalize_family_name(str(result_hmm_final)) + '\t' + str(evalue_pssm_final)  
                             + '\t' + str(evalue_hmm_final) + '\t' + str(bitscore_pssm_final) + '\n') 
                 famHMM = {} 
                 famPSSM = {} 
@@ -260,3 +260,48 @@ def run():
     warn("stdout", "Finished analysis.")
     return None
 
+
+def normalize_family_name(name):
+    family_dict = {
+    "Agatoxin": "Agatoxin",
+    "Ctenitoxin": "Ctenitoxin",
+    "Hexatoxin": "Hexatoxin",
+    "Holocyclotoxin": "Holocyclotoxin",
+    "KTx": "Potassium channel",
+    "Kunitz-type": "Kunitz-type",
+    "Latrotoxin": "Latrotoxin",
+    "NaTx": "Sodium channel",
+    "Segestritoxin": "Segestritoxin",
+    "Sparatoxin": "Sparatoxin",
+    "Theraphotoxin": "Theraphotoxins",
+    "Zodatoxin": "Zodatoxin",
+    "CAP": "CAP",
+    "Cystatin": "Cystatin",
+    "Cytolytic Peptides": "Cytolytic Peptides",
+    "Lycotoxin": "Lycotoxin",
+    "Defensin": "Defensin",
+    "Dermonecrotic": "Dermonecrotic",
+    "Filistatoxin": "Filistatoxin",
+    "GlycosylHydrolase_Hyaluronidase": "Hyaluronidase",
+    "Lectin": "C-type lectin",
+    "Lipocalin": "Lipocalin",
+    "Metalloprotease": "Metzincin Metalloprotease",
+    "NDBP": "NDBP",
+    "Oxotoxin": "Disulfide-Rich Peptides",
+    "PeptidaseS1": "Peptidase S1",
+    "PhospholipaseA2": "Phospholipase A2",
+    "Prokineticin": "Prokineticin",
+}
+    
+    if name == "None":
+        return name
+    
+    if name.lower() in family_dict.keys():
+        return family_dict[name.lower()]
+    
+    for key in family_dict.keys():
+        if key.lower() in name.lower():
+            return family_dict[key]
+    
+    else:
+        return name
