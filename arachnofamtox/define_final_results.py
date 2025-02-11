@@ -32,7 +32,8 @@ def gen_final_class_and_evalue(dic,method):
     Target_toxin = { "beta-":"Voltage-Gated Sodium Channels (Nav)", "gamma-":"Voltage-Gated Potassium Channels (Kv)",
            "delta-":"Voltage-Gated Sodium Channels (Nav)", "kappa-":"Voltage-Gated Potassium Channels (Kv)", 
            "mu-":"Voltage-Gated Sodium Channels (Nav)", "tau-":"Transient Receptor Potential Vanilloid 1 (TRPV1)",
-           "omega-":"Voltage-Gated Calcium Channels (Cav)", "M-":"Membranolytic Activity"}
+           "omega-":"Voltage-Gated Calcium Channels (Cav)", "M-":"Membranolytic Activity", "alpha-latrotoxin":"Presynaptic Neurons",
+           "Holocyclotoxin":"Presynaptic Neurons"}
 
     Target = {"KTx":"Voltage-Gated Potassium Channels (Kv)", "NaTx":"Voltage-Gated Sodium Channels (Nav)", 
               "CAP":"Antigen-5, Pathogen-related, including ion channels", "Lectin":"Glycoproteins on cell surfaces",
@@ -42,7 +43,7 @@ def gen_final_class_and_evalue(dic,method):
               "AstacinLikeMetalloprotease":"Extracellular matrix components",
               "TickMetalloprotease":"Extracellular Matrix", "Cytolytic":"Cell Membranes",
               "Dermonecrotic":"Sphingomyelin Phosphodiesterase D", "GlycosylHydrolase_Hyaluronidase":"Hyaluronic acid in the extracellular matrix",
-              "Holocyclotoxin":"Presynaptic Neurons", "Lipocalin":"Small hydrophobic molecules", "Prokineticin":"Unknown"}
+              "Lipocalin":"Small hydrophobic molecules", "Prokineticin":"Unknown", "Holocyclotoxin":"Presynaptic Neurons"}
     
     target = "-"
 
