@@ -29,19 +29,19 @@ def define_final(famname):
 
 def gen_final_class_and_evalue(dic,method):
 
-    Target_toxin = { "beta-":"Sodium channels", "gamma-":"Non-specific cations HCN channels",
-           "delta-":"Voltage-Gated Sodium channels", "kappa-":"Voltage-Gated Potassium channels", 
-           "mu-":"Voltage-Gated Sodium channels", "tau-":"TRP channels",
-           "omega-":"Calcium channels", "M-":"Membranolytic Activity"}
+    Target_toxin = { "beta-":"Voltage-Gated Sodium Channels (Nav)", "gamma-":"Voltage-Gated Potassium Channels (Kv)",
+           "delta-":"Voltage-Gated Sodium Channels (Nav)", "kappa-":"Voltage-Gated Potassium Channels (Kv)", 
+           "mu-":"Voltage-Gated Sodium Channels (Nav)", "tau-":"Transient Receptor Potential Vanilloid 1 (TRPV1)",
+           "omega-":"Voltage-Gated Calcium Channels (Cav)", "M-":"Membranolytic Activity"}
 
-    Target = {"KTx":"Potassium channels", "NaTx":"Sodium channels", 
-              "CAP":"CRISPs, Antigen-5 or Pathogen-related", "Lectin":"Carbohydrate-binding protein",
-              "PeptidaseS1":"Serine Protease", "PhospholipaseA2":"Hydrolysis of phospholipids",
-              "Cystatin":"Cysteine Protease Inhibitor", "Kunitz-type":"Serine Protease Inhibitor",
-              "TickDefensin":"Antimicrobial Activity", "NDBP":"Antimicrobial Activity", 
-              "AstacinLikeMetalloprotease":"Astacin-Like Metalloprotease",
-              "TickMetalloprotease":"Neprilysin", "Cytolytic":"Cytolytic Activity",
-              "Dermonecrotic":"Sphingomyelin Phosphodiesterase D", "GlycosylHydrolase_Hyaluronidase":"Hydrolase"}
+    Target = {"KTx":"Voltage-Gated Potassium Channels (Kv)", "NaTx":"Voltage-Gated Sodium Channels (Nav)", 
+              "CAP":"Antigen-5, Pathogen-related, including ion channels", "Lectin":"Glycoproteins on cell surfaces",
+              "PeptidaseS1":"Serine Proteases", "PhospholipaseA2":"Cell membranes",
+              "Cystatin":"Inhibits cysteine proteases", "Kunitz-type":"Protease Inhibitors, Neurotoxic Effects",
+              "TickDefensin":"Microbial cell membranes", "NDBP":"Various ion channels and receptors", 
+              "AstacinLikeMetalloprotease":"Extracellular matrix components",
+              "TickMetalloprotease":"Extracellular Matrix", "Cytolytic":"Cell Membranes",
+              "Dermonecrotic":"Sphingomyelin Phosphodiesterase D", "GlycosylHydrolase_Hyaluronidase":"Hyaluronic acid in the extracellular matrix"}
     
     target = "-"
 
