@@ -41,7 +41,8 @@ def gen_final_class_and_evalue(dic,method):
               "TickDefensin":"Microbial cell membranes", "NDBP":"Various ion channels and receptors", 
               "AstacinLikeMetalloprotease":"Extracellular matrix components",
               "TickMetalloprotease":"Extracellular Matrix", "Cytolytic":"Cell Membranes",
-              "Dermonecrotic":"Sphingomyelin Phosphodiesterase D", "GlycosylHydrolase_Hyaluronidase":"Hyaluronic acid in the extracellular matrix"}
+              "Dermonecrotic":"Sphingomyelin Phosphodiesterase D", "GlycosylHydrolase_Hyaluronidase":"Hyaluronic acid in the extracellular matrix",
+              "Holocyclotoxin":"Presynaptic Neurons", "Lipocalin":"Small hydrophobic molecules", "Prokineticin":"Unknown"}
     
     target = "-"
 
