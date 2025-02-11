@@ -1,106 +1,123 @@
 from datetime import datetime
-import sys 
+import sys
 from pathlib import Path
 from distutils.spawn import find_executable
-import os 
+import os
 import re
 import argparse
 import shutil
 
+
 def db_dir(args):
     # Search for directory with models
-    if str(args.path) == 'db':
-        if Path('db').is_dir() == False:
+    if str(args.path) == "db":
+        if Path("db").is_dir() == False:
             warn("stderr", "Models for PSSM and HMM not found")
             sys.exit(1)
     else:
-        if Path(str(args.path).split('/')[0]).is_dir() == False:
+        if Path(str(args.path).split("/")[0]).is_dir() == False:
             warn("stderr", "Models for PSSM and HMM not found")
             sys.exit(1)
 
-    return None 
+    return None
+
 
 def output_dir(args):
-    # Create output directory, if already exists, reuse it 
+    # Create output directory, if already exists, reuse it
     if os.path.isdir(args.out):
         if args.force:
             warn("stdout", f"Reusing output directory {args.out}")
             shutil.rmtree(args.out)
             os.mkdir(args.out)
         else:
-            warn("stderr",
+            warn(
+                "stderr",
                 f"Your choosen output folder '{args.out}' already exist!"
                 + " Please change it using --out option or use --force"
-                + " to reuse it. ")
+                + " to reuse it. ",
+            )
             sys.exit(1)
     else:
-        warn("stdout",f"Creating output directory {args.out}")
+        warn("stdout", f"Creating output directory {args.out}")
         os.mkdir(args.out)
+
 
 def cpus(args):
     # Check for available cpus
     cpus = args.cpu
     available_cpus = os.cpu_count()
-    
+
     if args.cpu == 0:
         cpus = available_cpus
     elif args.cpu > available_cpus:
-        warn("stdout",
+        warn(
+            "stdout",
             f"Option --cpus asked for {args.cpu} cores,"
-            + f" but system has only {available_cpus}.")
+            + f" but system has only {available_cpus}.",
+        )
         cpus = available_cpus
-    warn("stdout",f"Using {cpus} cores.")
-    return None 
+    warn("stdout", f"Using {cpus} cores.")
+    return None
+
 
 def search_tools():
-    #Check for needed tools
-    needed_tools = ("hmmscan", "rpsblast","blastp")
+    # Check for needed tools
+    needed_tools = ("hmmscan", "rpsblast", "blastp")
     for tool in needed_tools:
         if find_executable(tool) is None:
-            warn("stderr",f"Tool Not Found: {tool}")
+            warn("stderr", f"Tool Not Found: {tool}")
             sys.exit(1)
-    return None 
+    return None
+
 
 def setup(args):
-    #warn("stdout","Setup started")
+    # warn("stdout","Setup started")
     db_dir(args)
     output_dir(args)
     cpus(args)
     search_tools()
-    return None 
+    return None
 
-def warn(tp,text):
+
+def warn(tp, text):
     now = datetime.now().strftime("%H:%M:%S")
     line = f"[{now}] {text}"
     if tp == "stderr":
         print("[ERROR]" + line, file=sys.stderr)
     elif tp == "stdout":
         print(line, file=sys.stdout)
-    return None 
+    return None
+
 
 def remove_temp_files(args):
-    warn("stdout","Removing temporary files")
-    temp_files = ["out.hmmer.domtab", "merged_outputs.tsv","out.blastp.toxprot","out.pssm","out.hmmer.domtab.parsed"]
+    warn("stdout", "Removing temporary files")
+    temp_files = [
+        "out.hmmer.domtab",
+        "merged_outputs.tsv",
+        "out.blastp.toxprot",
+        "out.pssm",
+        "out.hmmer.domtab.parsed",
+    ]
     for f in temp_files:
         os.remove(Path(args.out, f))
     return None
 
+
 def line_prepender(filename, line):
-    with open(filename, 'r+') as f:
+    with open(filename, "r+") as f:
         content = f.read()
         f.seek(0, 0)
-        f.write(line + content) 
+        f.write(line + content)
 
-# Filter signalp predictions for sequences with signal peptides 
-def filter_signalp(tsv,args):
+
+# Filter signalp predictions for sequences with signal peptides
+def filter_signalp(tsv, args):
     outfile = open((Path(args.out, "signalp_predictions_filtered.tsv")), "w")
-    with open(tsv, 'r') as t:
+    with open(tsv, "r") as t:
         for line in t:
-            if line.startswith('#'):
+            if line.startswith("#"):
                 outfile.write(str(line))
             else:
-                if str(line.split('\t')[1].strip()) == "SP(Sec/SPI)":
+                if str(line.split("\t")[1].strip()) == "SP(Sec/SPI)":
                     outfile.write(str(line))
     return None
-
-
