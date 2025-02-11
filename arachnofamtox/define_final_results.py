@@ -83,13 +83,16 @@ def gen_final_class_and_evalue(dic, method):
     elif method == "pssm":  # for pssm get max value
         result_class = pred(dic, "max")
 
+    toxin_class = str(result_class).lower()
     if "toxin" in str(result_class):
         for i in Target_toxin.keys():
-            if i in str(result_class):
+            target = i.lower()
+            if target in toxin_class:
                 target = Target_toxin[i]  # define target for neurotoxins
     else:
         for i in Target.keys():
-            if i in str(result_class):
+            target = i.lower()
+            if target in toxin_class:
                 target = Target[i]  # define target for other toxins
 
     result_class_final = define_final(result_class)  # final name of family
