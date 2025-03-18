@@ -8,7 +8,7 @@ from Bio import SearchIO
 def run_hmmscan(fasta, args):
     warn("stdout", f"running hmmscan with evalue {args.eHMM}")
     if str(args.path) == "db":
-        path = Path("db/HMM/", "Arachnida.hmm")
+        path = Path("db/HMM/", "Arachnida_.hmm")
     else:
         path = str(args.path) + "/HMM/" + str(args.model_name_HMM) + ".hmm"
     subprocess.run(
@@ -33,7 +33,7 @@ def run_hmmscan(fasta, args):
 def run_rpsblast(fasta, args):
     warn("stdout", f"running RPS-BLAST with evalue {args.ePSSM}")
     if str(args.path) == "db":
-        path = Path("db/PSSM/", "ArachnidaToxinsV3.pssm")
+        path = Path("db/PSSM/", "Arachnida_ToxinsV3.pssm")
     else:
         path = str(args.path) + "/PSSM/" + str(args.model_name_PSSM) + ".pssm"
     subprocess.run(
@@ -59,9 +59,9 @@ def run_rpsblast(fasta, args):
 def run_blastp(fasta, args):
     warn("stdout", f"running BLASTp with evalue {args.eBLASTP}")
     if str(args.path) == "db":
-        path = Path("db/PSSM/", "ArachnidaToxinsV3.pssm")
+        path = Path("db/PSSM/", "Arachnida_ToxinsV3.pssm")
     else:
-        path = str(args.path) + "/ToxProt/toxprot"
+        path = str(args.path) + "/ToxProt/ToxProt"
     subprocess.run(
         [
             "blastp",
