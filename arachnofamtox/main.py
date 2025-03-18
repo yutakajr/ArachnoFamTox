@@ -42,15 +42,15 @@ parser.add_argument(
 parser.add_argument(
     "-model_name_PSSM",
     metavar="<string>",
-    default="Arachnida_ToxinsV3",
-    help="Specify models name. Default=Arachnida_ToxinsV3",
+    default="ArachnidaToxinsV3",
+    help="Specify models name. Default=ArachnidaToxinsV3",
 )
 
 parser.add_argument(
     "-model_name_HMM",
     metavar="<string>",
-    default="Arachnida_",
-    help="Specify models name. Default=Arachnida_",
+    default="Arachnida",
+    help="Specify models name. Default=Arachnida",
 )
 
 # parser.add_argument("-model_name_toxprot", metavar='<string>', default="toxprot",
