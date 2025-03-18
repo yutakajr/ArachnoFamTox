@@ -1,5 +1,5 @@
 # ArachnoFamTox: prediction and classification of Arachnids venom and toxin families 
-### Fernanda M. Abukawa, Marcela A. Ishihara, Wesley F. Mantovani, Caio F. de Castro, Leo K. Iwai, Alexandre K. Tashima,  Milton Y. Nishiyama-Jr
+### Fernanda M. Abukawa, Marcela A. Ishihara, Wesley F. Mantovani, Leo K. Iwai, Alexandre K. Tashima,  Milton Y. Nishiyama-Jr
 
 # Description
 
